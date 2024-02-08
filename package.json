@@ -1,7 +1,7 @@
 {
   "name": "colabo-editor-extension-file",
   "description": "file extension for colabo editor",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "keywords": [
     "colabo",
     "colabo extension"
@@ -44,7 +44,8 @@
     "rollup-plugin-auto-external": "^2.0.0",
     "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-typescript2": "^0.36.0",
-    "update-by-scope": "^1.1.3"
+    "update-by-scope": "^1.1.3",
+    "typescript": "^3.7.5"
   },
   "peerDependencies": {
     "@tiptap/core": "^2.0.0"
@@ -55,7 +56,11 @@
     "directory": "packages/colabo-editor-extension-file"
   },
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "npm run clean && rollup -c"
+    "clean": "rm -rf dist lib",
+    "type-check": "tsc --noEmit",
+    "build": "npm run build:js",
+    "build:js": "rollup -c",
+    "build:js:broken": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
+    "build:types": "tsc --emitDeclarationOnly"
   }
 }
